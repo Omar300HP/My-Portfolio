@@ -12,12 +12,11 @@ const Summary = ({ className }) => {
         className
       )}
     >
-      A front-end Developer with 3+ years of experience in the software
-      industry. Proven ability to develop and deliver high-quality,
-      cross-platform web applications using HTML, CSS, and JavaScript. Expertise
-      in user interface design, development, and testing. Strong problem-solving
-      and analytical skills. Ability to work independently and as part of a
-      team.
+      I&apos;m a front-end developer with 3+ years of experience building
+      beautiful, user-friendly web apps. I&apos;m proficient in HTML, CSS, and
+      JavaScript, and I&apos;m always up-to-date on the latest technologies.
+      I&apos;m also a great team player and I&apos;m always willing to go the
+      extra mile.
     </div>
   );
 };
