@@ -1,0 +1,7 @@
+.timeline :global(.ant-timeline-item-head) {
+  @apply bg-bgblack;
+}
+
+.timeline :global(.ant-timeline-item-tail) {
+  @apply border-sky-400;
+}

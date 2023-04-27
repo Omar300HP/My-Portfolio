@@ -5,7 +5,9 @@ const font = Poppins({ subsets: ["latin"], weight: "700" });
 
 const Hello = () => {
   return (
-    <div className={classNames("text-white text-3xl", font.className)}>
+    <div
+      className={classNames("text-white text-xl md:text-3xl", font.className)}
+    >
       Hello, I am Omar. Nice to meet you.
     </div>
   );

@@ -12,9 +12,9 @@ const Summary = ({ className }) => {
   const text = useTypingAnimation(textToType, 30);
 
   return (
-    <div className={classNames(" max-w-screen-lg", font.className, className)}>
+    <div className={classNames("max-w-screen-lg", font.className, className)}>
       <Input.TextArea
-        className="bg-transparent border-none text-gray-400 text-2xl resize-none w-full outline-none shadow-none overflow-hidden caret-white"
+        className="bg-transparent border-none text-gray-400 text-base md:text-2xl resize-none w-full outline-none shadow-none overflow-hidden caret-white"
         value={text}
         autoSize={{ minRows: 3, maxRows: 16 }}
         autoFocus

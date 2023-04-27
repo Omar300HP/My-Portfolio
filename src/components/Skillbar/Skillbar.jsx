@@ -6,9 +6,9 @@ const Skillbar = ({ skillName, skillLevel, className, size = "large" }) => {
   return (
     <div className={classNames("w-full", className)}>
       <Row justify={"space-between pb-1"}>
-        <Col className="pl-8">
+        <Col className="md:pl-8">
           <Typography.Text
-            className={classNames("text-white text-xl font-bold", {
+            className={classNames("text-white text-xs md:text-xl font-bold", {
               "text-xl": size === "large",
               "text-base": size === "small",
             })}
@@ -16,10 +16,10 @@ const Skillbar = ({ skillName, skillLevel, className, size = "large" }) => {
             {skillName}
           </Typography.Text>
         </Col>
-        <Col className="pr-16">
+        <Col className="md:pr-16">
           <Typography.Text
-            className={classNames("text-white text-xl font-bold", {
-              "text-xl": size === "large",
+            className={classNames("text-white  font-bold", {
+              "text-xs md:text-xl": size === "large",
               "text-base": size === "small",
             })}
           >
@@ -31,12 +31,12 @@ const Skillbar = ({ skillName, skillLevel, className, size = "large" }) => {
         <Col span={24}>
           <div
             className={classNames("bg-[#162950] rounded-full", {
-              "h-8": size === "large",
+              "h-4 md:h-8": size === "large",
               "h-4": size === "small",
             })}
           >
             <div
-              className="h-full rounded-full bg-linear-gradient "
+              className="h-full rounded-full bg-linear-gradient animate-pulse"
               style={{ width: `${SKILL_LEVELS[skillLevel].pecentage}%` }}
             ></div>
           </div>

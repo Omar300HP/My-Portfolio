@@ -10,15 +10,20 @@ const Navbar = () => {
   return (
     <Layout.Header
       className={classNames(
-        "text-white text-xl font-bold py-8 flex flex-row justify-start items-center gap-x-24 bg-inherit",
+        "text-white max-w-full h-auto text-sm md:text-xl font-bold py-8 flex flex-row justify-center md:justify-start items-center flex-wrap gap-x-24 bg-inherit",
         font.className
       )}
     >
-      <Link href="#Home" scroll={false}>
+      <Link
+        href="#Home"
+        id="Home"
+        className=" text-base md:text-xl"
+        scroll={false}
+      >
         Omar Abdel-Halim
       </Link>
 
-      <Space size={"middle"} className="ml-auto mr-6">
+      <Space size={"small"} className="md:ml-auto md:mr-6 ">
         <Github />
         <LinkedIn />
       </Space>
