@@ -29,7 +29,11 @@ export const SECONDARY_SKILLS = [
   { name: "E2E testing (cypress)", level: SKILL_LEVELS_ENUM.Intermediate },
   { name: "Integration testing", level: SKILL_LEVELS_ENUM.Advanced },
   {
-    name: "Unit testing (jest - react-testing-library - enzyme)",
+    name: "Unit testing (jest - enzyme)",
+    level: SKILL_LEVELS_ENUM.Expert,
+  },
+  {
+    name: "react-testing-library",
     level: SKILL_LEVELS_ENUM.Expert,
   },
   { name: "Redux (RTK - saga - thunk)", level: SKILL_LEVELS_ENUM.Advanced },

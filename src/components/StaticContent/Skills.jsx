@@ -21,10 +21,13 @@ const Skills = () => {
       <Typography.Title className="text-white text-4xl font-bold mt-12">
         Additional technologies and skills
       </Typography.Title>
-      <ul className="flex flex-row justify-start items-start flex-wrap w-[80%] gap-5 pl-16 list-disc">
+      <ul className="flex flex-row justify-start items-start flex-wrap gap-5 pl-16 list-disc">
         {SECONDARY_SKILLS.map((skill) => (
-          <li key={skill.name} className="text-white text-base font-bold ml-8">
-            {skill.name} / {SKILL_LEVELS[skill.level].label}
+          <li
+            key={skill.name}
+            className="text-white text-base flex-grow-0 basis-[300px] font-bold ml-8"
+          >
+            {skill.name}
           </li>
         ))}
       </ul>
