@@ -1,5 +1,7 @@
 export const GITHUB_LINK = process.env.NEXT_PUBLIC_GITHUB_LINK;
 export const LINKEDIN_LINK = process.env.NEXT_PUBLIC_LINKEDIN_LINK;
+export const PHONE = process.env.NEXT_PUBLIC_PHONE;
+export const MAIL = process.env.NEXT_PUBLIC_MAIL;
 
 export const SKILL_LEVELS_ENUM = {
   Beginner: "Beginner",

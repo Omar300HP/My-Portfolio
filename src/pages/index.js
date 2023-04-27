@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
-import { Navbar } from "@/components/Navbar";
 import { Card, Layout, Space } from "antd";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { Hello, Skills, Summary } from "@/components/StaticContent";
 
 const font = Poppins({ subsets: ["latin"], weight: "400" });
@@ -20,6 +21,7 @@ export default function Home() {
 
           <Skills />
         </Layout.Content>
+        <Footer />
       </Layout>
     </main>
   );

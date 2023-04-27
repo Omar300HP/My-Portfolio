@@ -1,9 +1,8 @@
 import { Layout, Space } from "antd";
 import Link from "next/link";
-import { GithubOutlined, LinkedinOutlined } from "@ant-design/icons";
-import { GITHUB_LINK, LINKEDIN_LINK } from "@/constants";
 import { Poppins } from "next/font/google";
 import classNames from "classnames";
+import { Github, LinkedIn } from "../ContactIcons";
 
 const font = Poppins({ subsets: ["latin"], weight: "700" });
 
@@ -20,12 +19,8 @@ const Navbar = () => {
       </Link>
 
       <Space size={"middle"} className="ml-auto mr-6">
-        <Link href={GITHUB_LINK} target="_blank">
-          <GithubOutlined />
-        </Link>
-        <Link href={LINKEDIN_LINK} target="_blank">
-          <LinkedinOutlined />
-        </Link>
+        <Github />
+        <LinkedIn />
       </Space>
     </Layout.Header>
   );
