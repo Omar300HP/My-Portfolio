@@ -6,7 +6,7 @@ import { Input } from "antd";
 const font = Poppins({ subsets: ["latin"], weight: "400" });
 
 const textToType =
-  "I'm a front-end developer with 3+ years of experience building beautiful, user-friendly web apps. I'm proficient in HTML, CSS, and JavaScript, and I'm always up-to-date on the latest technologies. I'm also a great team player and I'm always willing to go the extra mile.";
+  "I'm a front-end developer with 4+ years of experience building beautiful, user-friendly web apps. I'm proficient in HTML, CSS, and JavaScript, and I'm always up-to-date on the latest technologies. I'm also a great team player and I'm always willing to go the extra mile.";
 
 const Summary = ({ className }) => {
   const text = useTypingAnimation(textToType, 30);
