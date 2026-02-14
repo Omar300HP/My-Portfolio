@@ -3,5 +3,5 @@
 }
 
 .timeline :global(.ant-timeline-item-tail) {
-  @apply border-sky-400;
+  @apply border-sky-400 border;
 }
