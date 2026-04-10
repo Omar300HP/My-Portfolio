@@ -14,4 +14,4 @@
 ## Build & Tooling
 
 - **Linting**: ESLint 8.39.0 (Next.js config)
-- **Package Manager**: yarn (implied by yarn.lock)
+- **Package Manager**: pnpm (implied by pnpm-lock.yaml and `packageManager` in package.json)
