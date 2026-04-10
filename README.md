@@ -13,15 +13,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### Prerequisites
 
 - Node.js
-- Yarn (recommended) or npm
+- [pnpm](https://pnpm.io/installation) (recommended; enable [Corepack](https://nodejs.org/api/corepack.html) to use the version declared in `package.json`)
 
 ### Installation
 
 ```bash
 # Install dependencies
-yarn install
-# or
-npm install
+pnpm install
 ```
 
 ### Running Locally
@@ -29,9 +27,7 @@ npm install
 Run the development server:
 
 ```bash
-yarn dev
-# or
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
