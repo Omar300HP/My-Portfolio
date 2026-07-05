@@ -68,6 +68,7 @@ export const WORK = {
       "Three.js",
       "WebGL",
       "Ant Design",
+      "Shadcn/ui",
       "Tailwind",
     ],
     links: [
