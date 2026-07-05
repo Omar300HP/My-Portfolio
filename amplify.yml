@@ -1,0 +1,21 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Amplify's image doesn't bundle pnpm — provision it before installing.
+        - nvm install 20
+        - nvm use 20
+        - npm install -g pnpm@10.32.1
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - pnpm run build
+  artifacts:
+    # Next.js (with the /api route) deploys as SSR — artifacts live in .next
+    baseDirectory: .next
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - .next/cache/**/*
