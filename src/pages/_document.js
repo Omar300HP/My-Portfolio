@@ -6,23 +6,33 @@ export default function Document() {
       <Head>
         <meta
           name="description"
-          content="I'm Omar AbdelHalim front-end developer with 4+ years of experience building beautiful, user-friendly web apps."
+          content="Omar AbdelHalim — Senior Frontend Developer with 6+ years shipping fast, browser-native 3D web apps in React & Next.js."
         />
         <meta
           name="keywords"
-          content="Omar AbdelHalim, front-end developer, web developer, web apps, HTML, CSS, JavaScript"
+          content="Omar AbdelHalim, senior frontend developer, React, Next.js, Three.js, react-three-fiber, WebGL, 3D web apps"
         />
         <meta name="author" content="Omar AbdelHalim" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <meta property="og:title" content="Omar AbdelHalim Portfolio" />
+        <meta property="og:title" content="Omar AbdelHalim — Senior Frontend Developer" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://omarabdelhalim.com" />
         <meta
           property="og:description"
-          content="I'm Omar AbdelHalim front-end developer with 4+ years of experience building beautiful, user-friendly web apps."
+          content="Senior frontend engineer building fast, browser-native 3D web apps in React & Next.js — from a HIPAA-grade 3D dental platform to logistics portals that saved six figures."
         />
         <meta property="og:image" content="/assets/og-image.jpg" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />
