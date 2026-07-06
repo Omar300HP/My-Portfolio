@@ -12,8 +12,8 @@ frontend:
       commands:
         - pnpm run build
   artifacts:
-    # Next.js (with the /api route) deploys as SSR — artifacts live in .next
-    baseDirectory: .next
+    # next.config.js sets output: "export" — a fully static build lands in out/
+    baseDirectory: out
     files:
       - "**/*"
   cache:
