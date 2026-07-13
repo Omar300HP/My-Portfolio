@@ -49,8 +49,24 @@ export default function Nav() {
           <div className="hidden sm:flex items-center gap-1">
             {NAV_LINKS.map((link) =>
               link.href.startsWith("/") ? (
-                <Link key={link.href} href={link.href} className={NAV_LINK_CLASS}>
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`${NAV_LINK_CLASS} relative`}
+                >
                   {link.label}
+                  {/* Accent dot: marks the link that leaves the one-pager. */}
+                  <span
+                    className="absolute"
+                    style={{
+                      top: 7,
+                      right: 5,
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: "var(--accent)",
+                    }}
+                  />
                 </Link>
               ) : (
                 <a key={link.href} href={link.href} className={NAV_LINK_CLASS}>

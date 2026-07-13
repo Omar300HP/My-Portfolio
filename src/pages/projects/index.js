@@ -1,5 +1,4 @@
 import Head from "next/head";
-import ProjectShell from "@/components/projects/ProjectShell";
 import ProjectsHub from "@/components/projects/ProjectsHub";
 
 export default function ProjectsPage() {
@@ -15,9 +14,7 @@ export default function ProjectsPage() {
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#0A0C11" />
       </Head>
-      <ProjectShell>
-        <ProjectsHub />
-      </ProjectShell>
+      <ProjectsHub />
     </>
   );
 }

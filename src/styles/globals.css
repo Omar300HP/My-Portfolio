@@ -104,3 +104,67 @@ body {
     color: #fff;
   }
 }
+
+/* ---- Army Clash / Projects (from the Claude Design handoff) ------------ */
+/* Hover states for inline-styled elements; !important wins over the inline
+   base values, mirroring the prototype's style-hover attributes. */
+
+@keyframes ac-scan {
+  0% {
+    top: 6%;
+  }
+  50% {
+    top: 92%;
+  }
+  100% {
+    top: 6%;
+  }
+}
+.animate-ac-scan {
+  animation: ac-scan 4s ease-in-out infinite;
+}
+
+.ac-link:hover {
+  color: #fff !important;
+  border-color: #bef264 !important;
+}
+.ac-start:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+.ac-step:hover {
+  border-color: var(--army-color) !important;
+  color: #fff !important;
+}
+.ac-preset:hover {
+  border-color: var(--army-color) !important;
+  color: var(--army-color) !important;
+}
+.ac-resume:hover {
+  background: rgba(190, 242, 100, 0.2) !important;
+}
+.ac-primary:hover {
+  filter: brightness(1.08);
+}
+.ac-ghost:hover {
+  border-color: #fff !important;
+  color: #fff !important;
+}
+.ac-card {
+  transition: 0.25s;
+}
+.ac-card:hover {
+  border-color: rgba(190, 242, 100, 0.45) !important;
+  box-shadow: 0 30px 80px -40px rgba(190, 242, 100, 0.5);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ac-scan {
+    animation: none;
+  }
+  .ac-start:hover,
+  .ac-card:hover {
+    transform: none;
+  }
+}
