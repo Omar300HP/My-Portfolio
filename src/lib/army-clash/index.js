@@ -4,7 +4,8 @@
 import { createSimulation } from "./simulation";
 
 export { createSimulation } from "./simulation";
-export { UNIT_TYPES, TYPE_NAMES } from "./constants";
+export { nextRoundArmies } from "./round";
+export { UNIT_TYPES, TYPE_NAMES, TYPE_ID, STATS } from "./constants";
 
 // Run a Battle to completion and return its result. Convenience over
 // createSimulation(...).run() for headless use.
