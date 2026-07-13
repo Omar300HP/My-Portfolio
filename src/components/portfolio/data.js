@@ -11,6 +11,7 @@ export const BRAND = {
 
 export const NAV_LINKS = [
   { href: "#work", label: "Work" },
+  { href: "/projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
   { href: "#about", label: "About" },
 ];
