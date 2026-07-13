@@ -107,3 +107,56 @@ describe("simulateBattle — the Counter matrix and Engagement Range (T3)", () =
     expect(result.winner).toBe("A");
   });
 });
+
+describe("simulateBattle — Morale and Rout (T4)", () => {
+  it("Foot Archers beat equal Swordsmen when they can keep their distance", () => {
+    // On the open field the archers kite and volley; the swordsmen take
+    // casualties all the way in and their Morale breaks before they close.
+    const result = simulateBattle({
+      armies: [army("A", only("archer", 40)), army("B", only("swordsman", 40))],
+      seed: 15,
+    });
+    expect(result.winner).toBe("A");
+  });
+
+  it("ends by Rout: the loser breaks, and its routed Units are lost", () => {
+    const result = simulateBattle({
+      armies: [army("A", only("swordsman", 60)), army("B", only("swordsman", 20))],
+      seed: 21,
+    });
+
+    expect(result.winner).toBe("A");
+    expect(result.loser).toBe("B");
+    expect(result.routed).toBe("B");
+    // Routed Units are scattered — they never carry forward as Survivors.
+    expect(alive(result.survivors.B)).toBe(0);
+    expect(alive(result.survivors.A)).toBeGreaterThan(0);
+    expect(result.routedAt).toBeGreaterThan(0);
+  });
+
+  it("every Battle terminates — an even grind is decided by the 75s stalemate rule", () => {
+    for (const seed of [31, 32, 33]) {
+      const result = simulateBattle({
+        armies: [army("A", only("swordsman", 40)), army("B", only("spearman", 40))],
+        seed,
+      });
+      expect(result.winner).not.toBeNull();
+      expect(result.simTime).toBeLessThanOrEqual(76);
+    }
+  });
+
+  it("Swordsman vs Spearman is close to a coin flip across seeds", () => {
+    let a = 0;
+    let b = 0;
+    for (let seed = 1; seed <= 20; seed++) {
+      const result = simulateBattle({
+        armies: [army("A", only("swordsman", 40)), army("B", only("spearman", 40))],
+        seed,
+      });
+      if (result.winner === "A") a++;
+      else if (result.winner === "B") b++;
+    }
+    expect(a).toBeGreaterThanOrEqual(4);
+    expect(b).toBeGreaterThanOrEqual(4);
+  });
+});

@@ -44,6 +44,9 @@ export function counterMultiplier(a, b, ranged) {
   if (a === SPEARMAN && b === CAVALRY) return 2.6;
   if (a === ARCHER) return ranged ? (b === CAVALRY ? 0.8 : 1) : 0.45;
   if (b === ARCHER) return 1.7;
+  // Sword-vs-spear should be a coin flip (CONTEXT.md): the spear's longer
+  // reach wins the first strike, so the swordsman hits harder once inside it.
+  if (a === SWORDSMAN && b === SPEARMAN) return 1.12;
   return 1;
 }
 
@@ -66,6 +69,17 @@ export const MAX_STEPS = 20000;
 // square bound units are clamped inside.
 export const DEPLOY_GAP = 64;
 export const BOUNDS = 58;
+
+// Morale: an Army's will to fight, from 1 (fresh) to 0 (broken → Rout).
+// Derived from its weighted surviving fraction, floored so the first ~30% of
+// losses are absorbed, and pushed down when the enemy is in better shape.
+export const MORALE_FLOOR = 0.3;
+export const MORALE_PRESSURE = 0.45;
+// One-shot cinematic climax signal when either Army's Morale first dips here.
+export const CLIMAX_MORALE = 0.2;
+// A dead-even grind is decided at this sim time: the lower-Morale Army routs.
+export const STALEMATE_TIME = 75;
+export const FLEE_SPEED_MULT = 1.35;
 
 // Targeting/motion tuning.
 export const RETARGET_BASE = 0.45;

@@ -9,8 +9,13 @@ import {
   ARROW_HIT_RADIUS,
   ARROW_SPEED,
   BOUNDS,
+  CLIMAX_MORALE,
   DT,
+  FLEE_SPEED_MULT,
   MAX_STEPS,
+  MORALE_FLOOR,
+  MORALE_PRESSURE,
+  STALEMATE_TIME,
   NEAREST_MAX_RING,
   RETARGET_BASE,
   RETARGET_JITTER,
@@ -43,8 +48,42 @@ export function createSimulation(config) {
   let step = 0;
   let simTime = 0;
   let phase = "DEPLOY";
-  let over = false;
-  let winner = null;
+  let decided = false; // winner known (rout happened); sim may keep ticking
+  let result = null; // frozen at the moment of decision
+  let climax = false; // one-shot: either Army's Morale first dipped critical
+
+  // Initial morale weight per team — the denominator of the surviving fraction.
+  const initialWeight = [0, 0];
+  for (let i = 0; i < n; i++) initialWeight[world.team[i]] += STATS.weight[world.type[i]];
+  const morale = [1, 1];
+
+  function updateMorale() {
+    const aliveWeight = [0, 0];
+    for (let i = 0; i < n; i++) {
+      if (world.alive[i] && !world.fleeing[i]) {
+        aliveWeight[world.team[i]] += STATS.weight[world.type[i]];
+      }
+    }
+    for (let t = 0; t < 2; t++) {
+      const frac = initialWeight[t] ? aliveWeight[t] / initialWeight[t] : 0;
+      const enemyFrac = initialWeight[1 - t] ? aliveWeight[1 - t] / initialWeight[1 - t] : 0;
+      const pressure = Math.max(0, enemyFrac - frac) * MORALE_PRESSURE;
+      morale[t] = Math.max(
+        0,
+        Math.min(1, (frac - MORALE_FLOOR) / (1 - MORALE_FLOOR) - pressure),
+      );
+    }
+    if (!climax && (morale[0] < CLIMAX_MORALE || morale[1] < CLIMAX_MORALE)) climax = true;
+  }
+
+  function routArmy(team) {
+    for (let i = 0; i < n; i++) {
+      if (world.team[i] === team && world.alive[i]) world.fleeing[i] = 1;
+    }
+    phase = "ROUT";
+    decided = true;
+    result = buildResult(team);
+  }
 
   function updateCentroids() {
     centroids[0].x = centroids[0].z = centroids[0].count = 0;
@@ -73,7 +112,6 @@ export function createSimulation(config) {
   }
 
   function tick() {
-    if (over) return;
     const { posX, posZ, alive, fleeing, target, yaw, cd, retarget, team, type } = world;
     const grid = buildGrid(world);
     simTime += DT;
@@ -205,20 +243,18 @@ export function createSimulation(config) {
     }
 
     if (phase === "DEPLOY" && simTime > 2.2) phase = "ADVANCE";
-
     step++;
-    let a = 0;
-    let b = 0;
-    for (let i = 0; i < n; i++) {
-      if (!world.alive[i]) continue;
-      if (world.team[i] === 0) a++;
-      else b++;
-    }
-    if (a === 0 || b === 0 || step >= MAX_STEPS) {
-      over = true;
-      if (a > 0 && b === 0) winner = world.ids[0];
-      else if (b > 0 && a === 0) winner = world.ids[1];
-      else winner = null;
+
+    // The Battle is decided the moment an Army's Morale breaks and it Routs.
+    // Ticking may continue afterwards (the rout plays out for the camera),
+    // but the result is frozen at this moment.
+    if (!decided) {
+      updateMorale();
+      if (morale[0] <= 0.001) routArmy(0);
+      else if (morale[1] <= 0.001) routArmy(1);
+      else if (simTime > STALEMATE_TIME || step >= MAX_STEPS) {
+        routArmy(morale[0] <= morale[1] ? 0 : 1);
+      }
     }
   }
 
@@ -233,25 +269,33 @@ export function createSimulation(config) {
     return out;
   }
 
-  function getResult() {
+  const fielded = {
+    [world.ids[0]]: countByType(0),
+    [world.ids[1]]: countByType(1),
+  };
+
+  function buildResult(routedTeam) {
     const [idA, idB] = world.ids;
+    const winTeam = 1 - routedTeam;
     const survivors = { [idA]: {}, [idB]: {} };
-    if (winner === idA) survivors[idA] = countByType(0, { includeFleeing: false });
-    if (winner === idB) survivors[idB] = countByType(1, { includeFleeing: false });
+    survivors[world.ids[winTeam]] = countByType(winTeam, { includeFleeing: false });
     return {
-      winner,
-      loser: winner ? (winner === idA ? idB : idA) : null,
+      winner: world.ids[winTeam],
+      loser: world.ids[routedTeam],
+      routed: world.ids[routedTeam],
+      routedAt: simTime,
       steps: step,
       simTime,
       survivors,
       standing: { [idA]: countByType(0), [idB]: countByType(1) },
+      fielded,
       world,
     };
   }
 
   function run() {
-    while (!over) tick();
-    return getResult();
+    while (!decided) tick();
+    return result;
   }
 
   return {
@@ -259,12 +303,16 @@ export function createSimulation(config) {
     arrows,
     centroids,
     fight,
+    morale,
     tick,
     run,
-    getResult,
-    isOver: () => over,
+    getResult: () => result,
+    isOver: () => decided,
     get phase() {
       return phase;
+    },
+    get climax() {
+      return climax;
     },
     get simTime() {
       return simTime;
