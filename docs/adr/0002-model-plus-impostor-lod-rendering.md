@@ -1,5 +1,8 @@
 # Render animated models near-camera, impostor LOD for the distant mass
 
+**Status: superseded by ADR-0003.** The Claude Design handoff settled unit
+visuals on instanced merged-primitive silhouettes — no rigged models, no LOD.
+
 Units are drawn as **animated low-poly character models close to the camera** and as **cheap instanced impostors/primitives for the far mass** — rather than uniform primitives everywhere, or fully-animated models everywhere. Skinned character crowds are the single most expensive thing to render; naïve `SkinnedMesh` collapses past a few dozen, so near-camera Units use baked vertex-animation textures / instanced GPU skinning while the distant field degrades to impostors (the standard large-battle technique). Chosen to keep the visceral "real soldiers fighting" look exactly where the directed Cinematic camera spends its time, while still holding **hundreds per side at 60fps**.
 
 ## Considered options
