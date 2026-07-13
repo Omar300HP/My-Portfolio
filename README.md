@@ -32,6 +32,23 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Testing
+
+```bash
+# Run the simulation test suite (Vitest)
+pnpm test
+```
+
+## Projects
+
+Beyond the one-page portfolio, `/projects` hosts interactive pieces:
+
+- **Army Clash** (`/projects/army-clash`) — a real-time, agent-based battle
+  simulation in Three.js. The deterministic simulation engine lives in
+  `src/lib/army-clash/` (headless, fully unit-tested); the rendering and UI in
+  `src/components/projects/army-clash/`. Design rationale is recorded in
+  `docs/adr/` and the domain vocabulary in `CONTEXT.md`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -11,5 +11,8 @@ This projects is a personal portfolio website showcasing projects, skills, and c
 ## Key Directories
 
 - `src/`: Source code for the frontend application.
+- `src/lib/army-clash/`: Headless, deterministic battle-simulation engine (unit-tested with Vitest).
+- `src/components/projects/`: The Projects hub and the Army Clash game UI/rendering.
 - `public/`: Static assets.
 - `.context/`: AI-focused documentation context.
+- `docs/adr/` + `CONTEXT.md`: Architecture decisions and the domain glossary.
