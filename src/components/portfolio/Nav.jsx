@@ -1,4 +1,8 @@
+import Link from "next/link";
 import { BRAND, NAV_LINKS } from "./data";
+
+const NAV_LINK_CLASS =
+  "no-underline text-[#c3c9d4] text-[0.92rem] px-[13px] py-2 rounded-lg transition-colors hover:text-white hover:bg-white/[0.06]";
 
 export default function Nav() {
   return (
@@ -43,15 +47,33 @@ export default function Nav() {
         <div className="ml-auto flex items-center gap-1">
           {/* Section links collapse on phones; the CTA always stays. */}
           <div className="hidden sm:flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="no-underline text-[#c3c9d4] text-[0.92rem] px-[13px] py-2 rounded-lg transition-colors hover:text-white hover:bg-white/[0.06]"
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.href.startsWith("/") ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`${NAV_LINK_CLASS} relative`}
+                >
+                  {link.label}
+                  {/* Accent dot: marks the link that leaves the one-pager. */}
+                  <span
+                    className="absolute"
+                    style={{
+                      top: 7,
+                      right: 5,
+                      width: 5,
+                      height: 5,
+                      borderRadius: "50%",
+                      background: "var(--accent)",
+                    }}
+                  />
+                </Link>
+              ) : (
+                <a key={link.href} href={link.href} className={NAV_LINK_CLASS}>
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
           <a
             href="#contact"
