@@ -168,3 +168,38 @@ body {
     transform: none;
   }
 }
+
+/* ---- Mobile nav menu (from the Claude Design handoff) ------------------ */
+/* Hover states for inline-styled elements; !important wins over the inline
+   base values, mirroring the prototype's style-hover attributes. */
+
+.pf-burger:hover {
+  border-color: var(--accent) !important;
+}
+.pf-menu-close:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+.pf-menu-link:hover {
+  color: var(--accent) !important;
+}
+
+@keyframes pf-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pf-menu {
+  animation: pf-menu-in 0.22s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-menu {
+    animation: none;
+  }
+}
